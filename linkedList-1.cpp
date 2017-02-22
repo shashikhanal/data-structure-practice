@@ -37,6 +37,20 @@ void appendAfter(struct node *prev_node, int new_data)
 	cout<<"\nNew node to be added after: "<<new_node->data<<" next: "<<new_node->next;
 }
 
+void appendAtLast(struct node *last, struct node **afterLast_ref, int new_data)
+{
+	struct node *new_node = (struct node *) malloc(sizeof(struct node));
+
+	new_node->data = new_data;
+	new_node->next = NULL;
+	(*afterLast_ref) = new_node;
+	cout<<"\nNode added after last, data: "<<new_node->data<<" next: "<<new_node->next;
+
+	last->next = new_node;
+
+	return;
+}	
+
 void printList(struct node *n)
 {
 	while(n != NULL) 
@@ -97,6 +111,13 @@ int main()
 	printf("\nUpdated Linked List is: ");
 	printList(beforeHead);		
 	cout<<endl;
+
+	// Adding after last node
+	struct node *lastNode = NULL;
+	appendAtLast(third, &lastNode, 300);
+	
+	printf("\nUpdated Linked List is: ");
+	printList(beforeHead);
 
 	return 0;
 }
